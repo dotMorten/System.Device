@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Company>Microsoft Corporation</Company>
+    <Copyright>© Microsoft Corporation.  All rights reserved.</Copyright>
+    <Product>Microsoft® .NET Framework</Product>
+    <PackageId>CoreCompat.System.Device</PackageId>
+    <Version>4.8.0</Version>
+    <Authors>Morten Nielsen</Authors>
+    <Description>Port of the `System.Device` .NET Framework APIs to .NET Core, including GeoCoordinate, GeoCoordinateWatcher etc.</Description>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <AssemblyName>System.Device</AssemblyName>
+    <RepositoryUrl>https://github.com/dotMorten/System.Device</RepositoryUrl>
+    <RootNamespace>System.Device</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/dotMorten/System.Device</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>System.Device GPS GeoCoodinate GeoCoordinateWatcher Location</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- These files were in reference source, but don't seem to be part of .NET Framework, and they include duplicate classes -->
+    <Compile Remove="Location\CivicAddress.cs" />
+    <Compile Remove="Location\LocationCoordinate.cs" />
+    <Compile Remove="Location\LocationProvider.cs" />
+    <Compile Remove="Location\LocationProviderInternal.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+    <COMReference Include="LocationApiLib">
+      <Guid>{4486DF98-22A5-4F6B-BD5C-8CADCEC0A6DE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+</Project>
